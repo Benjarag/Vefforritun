@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Fixed viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Evaluation Form</title>
+</head>
+<body>
+    <!-- Changed to uppercase POST -->
+    <form method="POST" action="submitEvaluation.php" target="_blank">
+        <fieldset>
+            <legend>Personal Information:</legend>
+
+            <label for="firstName">First name:</label>
+            <input type="text" name="firstName" id="firstName">
+            <br>
+            <label for="lastName">Last name:</label>
+            <input type="text" name="lastName" id="lastName">
+            <br>
+            <!-- Removed colon from SSN label -->
+            <label for="ssn">Social Security Number</label>
+            <input type="text" name="ssn" id="ssn">
+            <br>
+            <label>Gender:</label>
+            <br>
+            <input type="radio" name="gender" id="genderMale" value="male">
+            <label for="genderMale">Male</label>
+            <br>
+            <input type="radio" name="gender" id="genderFemale" value="female">
+            <label for="genderFemale">Female</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Course context:</legend>
+            <!-- Added colons to labels -->
+            <label for="university">University:</label>
+            <input type="text" name="university" id="university" value="RU" disabled>
+            <br>
+            <label for="school">School:</label>
+            <select name="school" id="school" disabled>
+                <option value="Computer Science">Computer Science</option>
+            </select>
+            <br>
+            <label for="course">Course:</label>
+            <input type="text" name="course" id="course" value="T-213-VEFF" disabled>
+        </fieldset>
+
+        <fieldset>
+            <legend>Which lectures did you attend?</legend>
+            <!-- Fixed L3 label -->
+            <input type="checkbox" id="lecture1" name="lecture1">
+            <label for="lecture1">L1: Introduction</label>
+            <br>
+            <input type="checkbox" id="lecture2" name="lecture2">
+            <label for="lecture2">L2: Networks</label>
+            <br>            
+            <input type="checkbox" id="lecture3" name="lecture3">
+            <label for="lecture3">L3: HTMLI</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Please describe your overall impression of the course</legend>
+            <textarea name="impression" id="impression" rows="10" cols="50">My impression of this course is...</textarea>
+        </fieldset>
+
+        <!-- Fixed submit button capitalization -->
+        <button type="submit">Submit Evaluation</button>
+    </form>
+</body>
+</html>

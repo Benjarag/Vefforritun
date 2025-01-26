@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Interface</title>
+</head>
+<body>
+    <!-- Tune Selection -->
+    <label for="tuneSelect">Tune:</label>
+    <select name="tuneSelect" id="tuneSelect">
+        <option value="furElise">Fur Elise</option>
+        <option value="theGodfather">The Godfather</option>
+        <option value="sevenNationArmy">Seven Nation Army</option>
+    </select>
+
+    <!-- Control Buttons -->
+    <button type="button">Play</button>
+    <button type="button">Record</button>
+    <button type="button" disabled>Stop</button>
+
+    <!-- Piano Keys Section -->
+    <div class="piano-keys">
+        <!-- White Keys -->
+        <button class="white-key" id="c4" type="button">C4</button>
+        <button class="white-key" id="d4" type="button">D4</button>
+        <button class="white-key" id="e4" type="button">E4</button>
+        <button class="white-key" id="f4" type="button">F4</button>
+        <button class="white-key" id="g4" type="button">G4</button>
+        <button class="white-key" id="a4" type="button">A4</button>
+        <button class="white-key" id="b4" type="button">B4</button>
+        
+        <!-- Black Keys -->
+        <button class="black-key" id="c-sharp4" type="button">C#4</button>
+        <button class="black-key" id="d-sharp4" type="button">D#4</button>
+        <button class="black-key" id="f-sharp4" type="button">F#4</button>
+        <button class="black-key" id="g-sharp4" type="button">G#4</button>
+        <button class="black-key" id="a-sharp4" type="button">A#4</button>
+    </div>
+</body>
+</html>

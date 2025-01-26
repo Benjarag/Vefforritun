@@ -1,0 +1,91 @@
+<!--  -->
+<!-- COLORS -->
+<!--  -->
+
+<!-- BUTTON COLORS -->
+
+<!-- BASIC COLORS -->
+<!-- RED = #E74C3C -->
+<!-- YELLOW = #F1C40F -->
+<!-- GREEN = #2ECC71 -->
+<!-- BLUE = #3498DB -->
+
+<!-- CLICKED COLORS -->
+<!-- RED = #73261E -->
+<!-- YELLOW = #786207 -->
+<!-- GREEN = #176638 -->
+<!-- BLUE = #1A4C6D -->
+
+<!-- BACKGROUND COLOR = #2C3E50-->
+
+<!-- START, REPLAY BUTTONS COLORS -->
+<!-- DEFAULT = #34495E -->
+<!-- CLICKED = #1ABC9C -->
+<!-- DISABLED = #B2BABB -->
+
+<!-- INFORMATION ICON COLOR = #1ABC9C -->
+
+<!-- SCORE COLOR -->
+<!-- SCORE OUTER BORDER = #1ABF9E -->
+<!-- SCORE INNER COLOR = #34495E -->
+
+
+<!-- TODO: Make all required buttons, with colors above and when clicked they change colors as said above -->
+<!-- TODO: Create Dropdown option, with "Select sound:", Sine as the selected sound, and choices as: Sine, Square, Triangle -->
+<!-- TODO: Implement information hover structure, when you hover over the information.png, you can see text which gives info on the game-->
+<!-- TODO: Error message container, The controls, game board disappear under 600px and are replaced by an error message with the corresponding image. -->
+<!-- TODO: Score display, showing 0 at the beginning and having, "High score: 0" -->
+<!-- TODO: Make start and replay buttons, which have three stages, Default, Clicked and disabled, states change from default dark blue, (the regular color theme), Clicked neon green, and disabled grey. The start button should be default color initially and the replay button should be disabled initially -->
+<!-- TODO: Responsiveness: all game board pads, and level indicator resize automatically when the width of the screen (or browser window) changes. Re-sizing has to work even on devices with virtual viewports. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sound-selector">
+        <label>Select sound:</label>
+        <select class="sound-select">
+            <option>Sine</option>
+            <option>Square</option>
+            <option>Triangle</option>
+        </select>
+    </div>
+
+    <div class="game-board">
+        <button class="game-button" id="red"></button>
+        <button class="game-button" id="yellow"></button>
+        <button class="game-button" id="green"></button>
+        <button class="game-button" id="blue"></button>
+        
+        <!-- Score Circle -->
+        <div class="score-container">
+            <div class="score-outer">
+                <div class="score-inner">1</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="control-btn">Start</button>
+        <button class="control-btn" disabled>Replay</button>
+        <div class="info">
+            <img src="information.png" alt="Info" class="info-icon">
+            <div class="instructions">
+                Press the Start button to begin the game. At each level, repeat the sequence displayed on the board. 
+                If you need to review the sequence before making your move, press the Replay button.
+            </div>
+        </div>
+    </div>
+
+    <div class="high-score">High score: 0</div>
+
+    <div class="error-message">
+        <img src="oops.jpg" alt="Screen too small">
+    </div>
+</body>
+</html>
