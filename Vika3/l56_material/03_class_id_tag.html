@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+            <title>L5/L6 Example 3 - Class, ID, tag styling</title>
+            <meta charset="UTF-8">
+      
+            <meta name="description" content="Basic CSS styles for tags, classes and IDs.">
+            <meta name="keywords" content="CSS, VEFF213"> 
+            <meta name="author" content="Grischa Liebel"> 
+
+        <style>
+        div {
+          background-color: teal;
+        }
+        .redBG {
+          background-color: red;
+        }
+        #blueDiv {
+          background-color: blue;
+        }
+        </style>
+
+
+    </head>
+    <body>
+        <div style="background-color:#666666;">
+            <h1>Divs</h1>
+            <p class="redBG">Divs are containers for other elements. By default, they are invisible. However, together with CSS they are a powerful layouting and styling tool. Divs can be nested!</p>
+            <p>Here, we use different background colors to show how CSS style can be assigned to tags, classes, and ids. Not that the class can be used by different tags (e.g., one p and one div tag have the same class in this example).</p>
+            <div id="blueDiv" class="redBG">Web Programming I<br> Course Code: VEFF213</div> 
+            <div class="redBG">Spring 2019</div> 
+            <div>Instructor: Grischa</div>
+            <p>Here, we already see the concept of specificity in CSS: The id selector is more specific than the class selector, and that one is more specific than the general element/tag selector. Also, the div at the very top has an inline style, which overrides the internal style (since it's "closer").</p>
+        </div>
+    </body>
+</html>

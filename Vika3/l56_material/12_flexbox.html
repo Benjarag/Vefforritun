@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+            <title>L5/6 Example 12 - CSS flexbox</title>
+            <meta charset="UTF-8">
+          
+            <meta name="description" content="CSS flexbox.">
+            <meta name="keywords" content="CSS, VEFF213"> 
+            <meta name="author" content="Grischa Liebel"> 
+        <style>
+            div {
+                border: 1px solid black;
+            }
+            .container {
+                display: flex; /*Use the flexbox*/
+                flex-direction: row; /*Horizontal flow of flex items*/
+                flex-wrap: wrap; /*Wrap around when needed*/
+                justify-content: space-evenly; /*Even spacing between flex items*/
+                align-items: center; /*Centered layout across cross axis*/
+                }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="item" style="flex-grow: 2; order: 1; height: 60px; background-color: grey;">
+                <h1>Div</h1>
+                
+            </div>
+            <div class="item" style="flex-grow: 1; order: 5; height: 500px; background-color: red;">
+                <h1>Div</h1>
+            </div>
+            <div class="item" style="flex-grow: 1; order: 3; background-color: green;">
+                <h1>Div</h1>
+            </div>
+            <div class="item"style="flex-grow: 1; order: 100; background-color: blue;">
+                <h1>Div</h1>
+            </div>
+        </div>
+    </body>
+</html>

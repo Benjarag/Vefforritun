@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+            <title>L5/6 Example 8 - CSS attribute selectors</title>
+            <meta charset="UTF-8">
+          
+            <meta name="description" content="CSS attribute selectors.">
+            <meta name="keywords" content="CSS, VEFF213"> 
+            <meta name="author" content="Grischa Liebel"> 
+    
+        <style>
+            a[target="_blank"] {
+                background-color: pink;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HTML Hyperlinks</h1>
+        <p>Here we present how hyperlinks work.</p>
+        <h2>Relative links</h2>
+        <p>You can link to documents on the same host (e.g., in the same folder) using relative links: <a href="03b_target.html" target="_self">This opens 03b_target.html</a></p>
+
+        <h2>Absolute links</h2>
+        <p>You can link to external resources (e.g., another website) using absolute links: <a href="http://en.wikipedia.org/wiki/HTML" target="_self">This opens Wikipedia</a></p>
+        
+        <h2 id="bookmarks">Bookmarks</h2>
+        <p>You can give elements in your page an id. Then you can use hyperlinks to directly jump there.<br>
+            Absolute URL: <a href="https://en.wikipedia.org/wiki/HTML#Elements" target="_blank">https://en.wikipedia.org/wiki/HTML#Elements</a><br>
+            Relative URL (here in the current doc): <a href="#bookmarks" target="_self">#bookmarks</a></p>
+    </body>
+</html>

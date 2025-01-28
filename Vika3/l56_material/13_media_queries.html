@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+            <title>L5/6 Example 13 - CSS media queries</title>
+            <meta charset="UTF-8">
+          
+            <meta name="description" content="CSS media queries.">
+            <meta name="keywords" content="CSS, VEFF213"> 
+            <meta name="author" content="Grischa Liebel"> 
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <style>
+            @media screen and (max-width: 799px) {
+                #catImg {
+                    display: none;
+                }    
+            }
+
+            @media screen and (max-width: 1000px) {
+                #catImg {
+                    width: 300px;
+                }
+            }
+
+            @media screen and (min-width: 1001px) {
+                #catImg {
+                    width: 500px;
+                }
+            }
+
+            @media only print {
+                #catImg2 {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>CSS Media Queries</h1>
+        <p>Media queries change the look depending on the device settings (e.g., screen size, input, orientation).</p>
+        <p>The following image disappears when the window width goes under 800px. When it's between 800px and 1000px, the cat is 300px wide. Over 1000px, it's 500px wide.</p>
+
+        <img id="catImg" src="cat.jpg">
+
+        <p>The following image disappears only in the print view.</p>
+        <img id="catImg2" src="cat.jpg">
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+            <title>L5/6 Example 10 - CSS box model</title>
+            <meta charset="UTF-8">
+          
+            <meta name="description" content="CSS box model.">
+            <meta name="keywords" content="CSS, VEFF213"> 
+            <meta name="author" content="Grischa Liebel"> 
+    
+    </head>
+    <body>
+        <div style="width: 60%; margin-right: 10px; background-color: red; box-sizing:border-box; border: 1px solid black; padding: 100px;">
+            <h1>Margin</h1>
+            <p>Margins are added outside the border area. Here, there is a 10px margin to the right side.</p>
+
+            <h1>Width</h1>
+            <p>The width is set to 60% here, so it automatically re-sizes when the window width changes.</p>
+
+            <h1>Padding, box-sizing</h1>
+            <p>Padding is visible (it gets the same style as the content). It's added "within" the element. Note that usually padding is not included in the width/height! So here it would be 60% + padding + border. The box-sizing property changes this to include both.</p>
+        </div>
+    </body>
+</html>

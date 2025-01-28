@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+    <head>
+        <title>L5/6 Example 9 - CSS Pseudo-classes and pseudo-elements</title>
+        <meta charset="UTF-8">
+      
+        <meta name="description" content="CSS pseudo classes and pseudo elements.">
+        <meta name="keywords" content="CSS, VEFF213"> 
+        <meta name="author" content="Grischa Liebel"> 
+
+
+        <style>
+            a:link {
+                background-color: black;
+                color: white;
+            }
+
+            a:visited {
+                background-color: blue;
+                color: white;
+            }
+
+            a:hover {
+                background-color: grey;
+                color: black;
+            }
+
+            a:active {
+                background-color: red;
+                color: white;
+            }
+
+            input:disabled {
+                font-weight: bold;
+                color: red;
+            }
+
+            :checked {
+                margin: 20px;
+            }
+
+            input:invalid {
+                background-color: red;
+            }
+
+            p::first-letter {
+                font-size: 4rem;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Forms</h1>
+        <a href="http://google.com">Google</a>
+        <p id="specialP">Here are a couple of examples of what you can place in an HTML form! Here, we send the data using GET. This is not secure, as you can see in the target URL of the request (your password will be visible).</p>
+        <form action="08_forms.html"  method="get">
+            <fieldset>
+            <legend>User information</legend> 
+            <label for="userfield">User name:</label>
+            <input type="text" id="userfield" name="username" disabled value="Default User"><br>
+            <input type="email" id="emailfield" name="mail" value="Default Mail"><br>
+            Password: <input type="password" name="password"><br>
+        </fieldset>      
+
+        <select name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+            </select> 
+    <br>            
+                <input type="radio" name="role" value="usr" checked>User<br>
+                <input type="radio" name="role" value="admin">Admin<br>
+                <textarea name="message" rows="10" cols="50">Do you have any message to us?</textarea><br>
+                <input type="checkbox" name="check" value="check1">Item 1<br>      
+                <input type="checkbox" name="check" value="check2">Item 2<br> 
+                <input type="submit" value="Submit">
+
+        </form>
+    </body>
+</html>

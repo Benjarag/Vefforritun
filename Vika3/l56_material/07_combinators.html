@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+            <title>L5/6 Example 7 - CSS Combinators</title>
+            <meta charset="UTF-8">
+      
+            <meta name="description" content="CSS combinators.">
+                <meta name="keywords" content="CSS, VEFF213"> 
+                <meta name="author" content="Grischa Liebel"> 
+        <style>
+        b > p {
+            background-color: yellow;
+        }
+        div p {
+            background-color: red;
+        }
+        div > p {
+            background-color: green;
+        }
+
+        div ~ p {
+            background-color: teal;
+        }
+
+        </style>
+
+
+    </head>
+    <body>
+        <div style="background-color:#666666;">
+            <h1>Descendants</h1>
+            <p>This is a direct child of a div tag. Therefore, its background will be green.</p>
+            <i><p>This paragraph is not a direct child of a div, but a descendant (it's deeper down in the hierarchy). Therefore, it's red.</p></i>
+        </div>
+        <b><p>This p tag is a direct child of a b tag. Therefore, background is red.</p></b>
+        <b><i><p>This p tag is also nested in a b tag, but not directly. Therefore, the background is not changed.</p></i></b>
+        <p>
+            This paragraph is a sibling to a div tag. Therefore, background is teal.
+        </p>
+    </body>
+</html>

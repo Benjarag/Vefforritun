@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+            <title>L5/6 Example 5 - Relative sizes</title>
+            <meta charset="UTF-8">
+      
+            <meta name="description" content="CSS relative sizing.">
+            <meta name="keywords" content="CSS, VEFF213"> 
+            <meta name="author" content="Grischa Liebel"> 
+    </head>
+    <body>
+        <p>em is a relative sizing unit. 1em is equivalent to your base font size.</p>
+        <div style="font-size: 2em;">
+            2em is double that size.
+            <p style="font-size: 2em;">
+                The problem is, em refers to the font size of the parent element! So nested em definitions multiply.
+            </p>
+            <p style="font-size: 2rem;">
+                    rem instead always refers to the font size of your root element (body). Rem stands for "Root em".
+                </p>
+        </div>
+    </body>
+</html>
