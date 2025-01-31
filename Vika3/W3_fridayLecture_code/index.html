@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Piano application</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Harpa Guðjónsdóttir">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="controlDiv" class="applicationDiv">
+        <div id="tuneSelectDiv" class="controlSubDiv">
+            <label for="tuneSelect">Tune:</label>
+
+            <select name="tuneSelect" id="tuneSelect">
+                <option value="furElise">Fur Elise</option>
+                <option value="theGodfather">The Godfather</option>
+                <option value="sevenNationArmy">Seven Nation Army</option>
+            </select>
+
+            <button id="playButton" type="button"><img class="controlButton" src="play.png" alt="Button to play tune">
+            </button>
+        </div>
+        <div id="recordDiv" class="controlSubDiv">
+            <label for="recordButton">Record:</label>
+            <button id="recordButton" type="button"><img class="controlButton" src="record.png"
+                    alt="Button to record tune">
+            </button>
+            <button id="stopButton" type="button" disabled><img class="controlButton" src="stop.png"
+                    alt="Button to stop recording of tune">
+            </button>
+        </div>
+    </div>
+    <div id="pianoDiv" class="applicationDiv">
+        <button id="c4" class="whiteKey" type="button">C4<br>(a)</button>
+        <button id="c#4" class="blackKey" type="button">C#4<br>(w)</button>
+        <button id="d4" class="whiteKey" type="button">D4<br>(s)</button>
+        <button id="d#4" class="blackKey" type="button">D#4<br>(e)</button>
+        <button id="e4" class="whiteKey" type="button">E4<br>(d)</button>
+        <button id="f4" class="whiteKey" type="button">F4<br>(f)</button>
+        <button id="f#4" class="blackKey" type="button">F#4<br>(t)</button>
+        <button id="g4" class="whiteKey" type="button">G4<br>(g)</button>
+        <button id="g#4" class="blackKey" type="button">G#4<br>(y)</button>
+        <button id="a4" class="whiteKey" type="button">A4<br>(h)</button>
+        <button id="bb4" class="blackKey" type="button">Bb4<br>(u)</button>
+        <button id="b4" class="whiteKey" type="button">B4<br>(j)</button>
+        <button id="c5" class="whiteKey" type="button">C5<br>(k)</button>
+        <button id="c#5" class="blackKey" type="button">C#5<br>(o)</button>
+        <button id="d5" class="whiteKey" type="button">D5<br>(l)</button>
+        <button id="d#5" class="blackKey" type="button">D#5<br>(p)</button>
+        <button id="e5" class="whiteKey" type="button">E5<br>(;)</button>
+    </div>
+    <div id="lessThan600Px">
+        Bla bla bla
+    </div>
+</body>
+
+</html>

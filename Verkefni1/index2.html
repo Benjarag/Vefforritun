@@ -41,40 +41,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <meta charset="UTF-8"> -->
+    <meta charset="UTF-8"> <!-- Character encoding declared here, as the first element in <head> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Game</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylenew.css"> 
 </head>
 <body>
-    <div class="sound-selector">
+    <div class="sound-selector" id="sound-selector">
         <label>Select sound:</label>
-        <select class="sound-select">
-            <option>Sine</option>
-            <option>Square</option>
-            <option>Triangle</option>
+        <select class="dropdown-content">
+            <option>
+                Sine
+            </option>
+            <option>
+                Square
+            </option>
+            <option>
+                Triangle
+            </option>
         </select>
     </div>
+    
+    <div class="game-board" id="game-board">
+            <button class="game-pad" id="red"></button>
+            <button class="game-pad" id="yellow"></button>
+            <button class="game-pad" id="green"></button>
+            <button class="game-pad" id="blue"></button>
 
-    <div class="game-board">
-        <button class="game-button" id="red"></button>
-        <button class="game-button" id="yellow"></button>
-        <button class="game-button" id="green"></button>
-        <button class="game-button" id="blue"></button>
-        
-        <!-- Score Circle -->
-        <div class="score-container">
+        <div class="score-circle">
             <div class="score-outer">
                 <div class="score-inner">1</div>
             </div>
         </div>
     </div>
 
-    <div class="controls">
-        <button class="control-btn">Start</button>
-        <button class="control-btn" disabled>Replay</button>
-        <div class="info">
-            <img src="information.png" alt="Info" class="info-icon">
+    <div class="buttons" id="buttons">
+        <button class="start-button">Start</button>
+        <button class="replay-button" aria-disabled="true">Replay</button>
+        <div class="information-hover">
+            <img src="information.png" alt="info" class="info-icon">
             <div class="instructions">
                 Press the Start button to begin the game. At each level, repeat the sequence displayed on the board. 
                 If you need to review the sequence before making your move, press the Replay button.
@@ -82,10 +87,13 @@
         </div>
     </div>
 
-    <div class="high-score">High score: 0</div>
+    <div class="high-score" id="high-score">
+        High score: 0
+    </div>
 
     <div class="error-message">
-        <img src="oops.jpg" alt="Screen too small">
+        <img src="oops.jpg" alt="Screen width too small">
     </div>
 </body>
+
 </html>

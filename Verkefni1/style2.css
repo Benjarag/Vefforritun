@@ -1,15 +1,18 @@
-
 :root {
     --background: #2C3E50;
     --red: #E74C3C;
     --yellow: #F1C40F;
     --green: #2ECC71;
     --blue: #3498DB;
+    --red-clicked: #73261E;
+    --yellow-clicked: #786207;
+    --green-clicked: #73261E;
+    --blue-clicked: #73261E;
     --btn-default: #34495E;
     --btn-clicked: #1ABC9C;
-    --btn-disabled: #5E6D75;
+    --btn-disabled: #B2BABB;
     --info-green: #1ABC9C;
-    --score-outer: #1ABC9C;
+    --score-outer: #1ABF9E;
     --score-inner: #34495E;
 }
 
@@ -28,11 +31,17 @@ body {
     margin: 20px 0;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 7px;
 }
 
-.sound-select {
+.sound-selector label {
+    font-size: 1.2em;
+}
+
+.dropdown-content {
     background: white;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .game-board {
@@ -45,14 +54,14 @@ body {
     position: relative;
 }
 
-.game-button {
+.game-pad {
     border: none;
     border-radius: 15px;
     cursor: pointer;
-    /* transition: filter 0.2s; */
+    transition: filter 0.2s;
 }
 
-.game-button:active {
+.game-pad:active {
     filter: brightness(70%);
 }
 
@@ -61,15 +70,15 @@ body {
 #green { background-color: var(--green); }
 #blue { background-color: var(--blue); }
 
-.controls {
+.buttons {
     display: flex;
     gap: 20px;
-    margin: 10px 0;
+    margin: 20px 0;
     justify-content: center;
     align-items: center;
 }
 
-.control-btn {
+.start-button, .replay-button {
     padding: 12px 24px;
     border: none;
     border-radius: 6px;
@@ -79,16 +88,16 @@ body {
     transition: background-color 0.2s;
 }
 
-.control-btn:active {
+.start-button:active, .replay-button:active {
     background-color: var(--btn-clicked);
 }
 
-.control-btn:disabled {
+.replay-button[aria-disabled="true"] {
     background-color: var(--btn-disabled);
-    color: #87929B
+    color: #D7DBDD;
 }
 
-.info {
+.information-hover {
     position: relative;
     display: inline-block;
 }
@@ -108,31 +117,42 @@ body {
     background-color: #34495E;
     color: white;
     padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);}
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
 
-.info:hover .instructions {
+.information-hover:hover .instructions {
     display: block;
 }
 
-/* Remove the fixed positioning from .high-score */
 .high-score {
-    margin-top: 10px; /* Add some spacing below the controls */
+    margin-top: 10px;
     font-size: 1.2em;
-    text-align: center; /* Center the text */
+    text-align: center;
 }
 
 .error-message {
     display: none;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.score-container {
+.error-message img {
+    max-width: 100%;
+    height: auto;
+}
+
+.score-circle {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    width: 120px; /* Increased from 80px */
-    height: 120px; /* Increased from 80px */
+    width: 120px;
+    height: 120px;
 }
 
 .score-outer {
@@ -147,22 +167,21 @@ body {
 
 .score-inner {
     background: var(--score-inner);
-    width: 110px; 
-    height: 110px; 
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 20px; /* Increased from 24px */
-    /* font-weight: bold; */
+    font-size: 20px;
 }
 
 @media (max-width: 599px) {
     body > *:not(.error-message) {
         display: none;
     }
-    
+
     .error-message {
         display: block;
     }

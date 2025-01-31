@@ -1,0 +1,98 @@
+#controlDiv {
+  display: flex;
+  margin-bottom: 35px;
+}
+
+.controlSubDiv {
+  width: 50%;
+}
+
+#pianoDiv {
+  display: flex;
+  position: relative;
+}
+
+.applicationDiv {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.controlButton {
+  width: 1rem;
+  height: 1rem;
+}
+
+.whiteKey {
+  background-color: #ffffff;
+  height: 100px;
+  width: 10%;
+  margin: 0;
+  padding: 0;
+  flex: none;
+  position: relative;
+  border-color: #979797;
+}
+
+.blackKey {
+  background-color: #000000;
+  color: #ffffff;
+  height: 80px;
+  width: 6%;
+  margin: 0;
+  padding: 0;
+  flex: none;
+  position: relative;
+  z-index: 1;
+  border-color: #979797;
+}
+
+#c\#4 {
+  position: absolute;
+  left: 7%;
+}
+
+#d\#4 {
+  position: absolute;
+  left: 17%;
+}
+
+#f\#4 {
+  position: absolute;
+  left: 37%;
+}
+
+#g\#4 {
+  position: absolute;
+  left: 47%;
+}
+
+#bb4 {
+  position: absolute;
+  left: 57%;
+}
+
+#c\#5 {
+  position: absolute;
+  left: 77%;
+}
+
+#d\#5 {
+  position: absolute;
+  left: 87%;
+}
+
+button:enabled:active {
+  background-color: #989898;
+}
+
+#lessThan600Px {
+  display: none;
+}
+
+@media only screen and (max-width: 599px) {
+  #lessThan600Px {
+    display: block;
+  }
+
+  /*TODO: Fjarlægja allt annað og setja rétta stíla á lessThan600Px*/
+}
