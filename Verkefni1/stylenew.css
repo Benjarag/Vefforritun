@@ -176,7 +176,7 @@ body {
     font-size: 2vw; /* Responsive font size */
 }
 
-@media (max-width: 599px) {
+@media (max-width: 599.5px) {
     body > *:not(.error-message) {
         display: none;
     }
