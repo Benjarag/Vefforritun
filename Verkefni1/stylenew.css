@@ -1,4 +1,5 @@
 :root {
+    /* Color defenitions */
     --background: #2C3E50;
     --red: #E74C3C;
     --yellow: #F1C40F;
@@ -11,7 +12,6 @@
     --btn-default: #34495E;
     --btn-clicked: #1ABC9C;
     --btn-disabled: #5E6D75;
-    --info-green: #1ABC9C;
     --score-outer: #1ABC9C;
     --score-inner: #34495E;
 }
@@ -21,7 +21,7 @@ body {
     color: white;
     font-family: Arial, sans-serif;
     margin: 0;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,15 +30,13 @@ body {
 
 .sound-selector {
     display: flex;
-    align-items: center;
+    align-items: center; 
     gap: 5px;
     margin-top: 20px;
 }
 
 .dropdown-content {
     background: white;
-    padding: 5px;
-    border-radius: 5px;
 }
 
 .game-board {
@@ -57,7 +55,6 @@ body {
     height: 100%; /* Fill the grid cell */
     border: none;
     border-radius: 15px;
-    cursor: pointer;
 }
 
 #red { background-color: var(--red); }
@@ -70,14 +67,12 @@ body {
 #green:active { background-color: var(--green-clicked); }
 #blue:active { background-color: var(--blue-clicked); }
 
-.game-pad:active {
-    filter: brightness(70%);
-}
+/* CURRENTLY HERE */
 
 .buttons {
     display: flex;
     gap: 5px;
-    /* margin-top: 10px 0; */
+    margin-top: 10px 0;
     justify-content: center;
     align-items: center;
 }
@@ -108,7 +103,6 @@ body {
 .info-icon {
     width: 24px;
     height: 24px;
-    cursor: help;
 }
 
 .instructions {
@@ -176,7 +170,7 @@ body {
     font-size: 2vw; /* Responsive font size */
 }
 
-@media (max-width: 599.5px) {
+@media (max-width: 599.5px) { /* Correctly gets 600px to work and not 599 */
     body > *:not(.error-message) {
         display: none;
     }
