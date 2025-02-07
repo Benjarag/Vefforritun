@@ -19,7 +19,7 @@
 body {
     background-color: var(--background);
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Arial, sans-serif;
     margin: 0;
     /* min-height: 100vh; */
     display: flex;
@@ -42,8 +42,7 @@ body {
 .game-board {
     width: 37vw; /* 37% of viewport width */
     aspect-ratio: 1; /* Maintain square shape */
-    max-height: 60vh;
-    margin: 20px auto 15px; /* Reduce bottom margin */
+    margin: 17.5px auto 20px; /* Reduce bottom margin */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5%;
@@ -67,8 +66,6 @@ body {
 #green:active { background-color: var(--green-clicked); }
 #blue:active { background-color: var(--blue-clicked); }
 
-/* CURRENTLY HERE */
-
 .buttons {
     display: flex;
     gap: 5px;
@@ -78,12 +75,11 @@ body {
 }
 
 .start-button, .replay-button {
-    padding: 12px 24px;
+    padding: 12px 20px;
     border: none;
     border-radius: 6px;
     background-color: var(--btn-default);
     color: white;
-    cursor: pointer;
 }
 
 .start-button:active, .replay-button:active {
@@ -101,51 +97,48 @@ body {
 }
 
 .info-icon {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
 }
 
 .instructions {
     display: none;
     position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 250px;
+    right: 0; /* align to the right */
+    bottom: 0; /* align to the bottom */
+    width: 200px;
     background-color: #34495E;
     color: white;
     padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    border-radius: 5px;
+    z-index: 1;
 }
 
 .information-hover:hover .instructions {
     display: block;
 }
+/* HERE NOW */
 
 .high-score {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .error-message {
     display: none;
     text-align: center;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 50%; /* vertically center the element */
+    left: 50%; /* horizontally center the element */
+    transform: translate(-50%, -50%); /* adjust position to truly center it */
 }
 
 .score-circle {
     position: absolute;
-    width: 33%; /* Relative to game board size */
-    height: 33%; /* Relative to game board size */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+    width: 33%; /* relative to game board size */
+    height: 33%; /* relative to game board size */
+    top: 50%; /* vertically center the element */
+    left: 50%; /* horizontally center the element */
+    transform: translate(-50%, -50%); /* adjust position to truly center it */
 }
 
 .score-outer {
@@ -154,8 +147,8 @@ body {
     height: 100%;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* horizontal */
+    align-items: center; /* vertical */
 }
 
 .score-inner {
@@ -164,10 +157,10 @@ body {
     height: 90%; /* Slightly smaller than outer circle */
     border-radius: 50%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* horizontal */
+    align-items: center; /* vertical */
     color: white;
-    font-size: 2vw; /* Responsive font size */
+    font-size: 2vw; /* 2% of viewport width */
 }
 
 @media (max-width: 599.5px) { /* Correctly gets 600px to work and not 599 */
