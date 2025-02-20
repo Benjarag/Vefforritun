@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Week 5 Lecture Code</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Harpa Guðjónsdóttir">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- We need to import Axios in order to be able to use the axios object below -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>Week 5 JavaScript</h1>
+
+    <section id="arrow-functions" class="section">
+        <h2>1. Convert to arrow functions</h2>
+        <p>Refactor this function into an arrow function.</p>
+        <pre>
+            function multiply(a, b) {
+                return a * b;
+            }
+            console.log(multiply(4, 5));
+        </pre>
+        <button onclick="testArrowFunctions()">Run example</button>
+        <pre id="output-arrow-functions"></pre>
+    </section>
+
+    <section id="array-methods" class="section">
+        <h2>2. Use built-in array methods instead of loops</h2>
+        <p>Rewrite this using <code>map</code> instead of a <code>for</code> loop.</p>
+        <pre>
+            const numbers = [1, 2, 3, 4, 5];
+            const doubled = [];
+            for (let i = 0; i &lt; numbers.length; i++) {
+                doubled.push(numbers[i] * 2);
+            }
+            console.log(doubled);
+        </pre>
+        <button onclick="testArrayMethods()">Run example</button>
+        <pre id="output-array-methods"></pre>
+    </section>
+
+    <section id="fetch-api" class="section">
+        <h2>3. Fetch data from an API</h2>
+        <p>Click the button to fetch user data from a public API.</p>
+        <button onclick="fetchUserData()">Fetch Users</button>
+        <ul id="user-list"></ul>
+    </section>
+
+    <section id="memory-game" class="section">
+        <h2>5. Memory card matching game</h2>
+        <p>Click on two cards to see if they match!</p>
+        <div id="game-board"></div>
+        <button onclick="resetGame()">Reset game</button>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
