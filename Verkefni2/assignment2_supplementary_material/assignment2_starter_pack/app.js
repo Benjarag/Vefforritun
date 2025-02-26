@@ -29,7 +29,7 @@ const keyMap = {
     "s": "pad-blue"
 }
 
-// Helper function to map pad names to element IDs
+// helper function to map pad names to element IDs
 const mapPadId = (pad) => {
     const mapping = {
         red: "pad-red",
@@ -56,19 +56,39 @@ const failureModal = document.getElementById("failure-modal");
 
 // ####################
 // ### Start Button ###
+// ####################
 startButton.addEventListener("click", () =>{
     console.log("buttonStart-test")
     gameState.isPlaying = true;
     startGame();
 });
+
+// #####################
+// ### REPLAY BUTTON ###
+// #####################
+replayButton.addEventListener("click", () => {
+    // Disable replay button immediately when replaying
+    replayButton.disabled = true;
+    gameState.isPlaying = false;
+    playSequence();
+});
+
 // ####################
+// ### RESET BUTTON ###
+// ####################
+resetButton.addEventListener("click", () => {
+    failureModal.style.display = "none"; // add this to hide the modal when reset is clicked
+    startGame(); // reset the game and restart
+});
 
 // ####################
 // ### SOUND SELECT ###
-soundSelect.addEventListener("change", () => {
-    synth.oscillator.type = soundSelect.value;
-});
 // ####################
+soundSelect.addEventListener("change", () => {
+    if (synth) {
+        synth.oscillator.type = soundSelect.value;
+    }
+});
 
 // ###############################
 // ### Listeners and pad cicks ###
@@ -138,6 +158,7 @@ const lightUpPad = (padId) => {
 
 // ###########################
 // ### CHECKING USER INPUT ###
+// ###########################
 const checkUserInput = async () => {
     const currentIndex = gameState.userSequence.length - 1; // get the current index of the input
 
@@ -147,17 +168,21 @@ const checkUserInput = async () => {
         console.error("Wrong input!");
         gameState.userSequence = [];
         gameState.isPlaying = false;
+        failureModal.style.display = "block";
         return;
     }
 
     // If the entire sequence was correctly inputted
     if (gameState.userSequence.length === gameState.sequence.length) {
         gameState.isPlaying = false;
+
+        const url = "http://localhost:3000/api/v1/game-state/sequence";
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/game-state/sequence", {
+            const response = await axios.post(url, {
                 sequence: gameState.sequence
             });
-            // Update game state with new sequence and level
+            // succesful, Update game state with new sequence and level
+            console.log("Success: ", response.data);
             gameState.sequence = response.data.gameState.sequence;
             gameState.level = response.data.gameState.level;
             gameState.highScore = response.data.gameState.highScore;
@@ -166,11 +191,10 @@ const checkUserInput = async () => {
             playSequence(); // Play the new sequence for the user
 
         } catch (error) {
-            console.error("Error posting sequence:", error);
+            console.log("Error posting sequence:", error);
         }
     }
 };
-// ###########################
 
 // ##################
 // ### GAME LOGIC ###
@@ -181,27 +205,30 @@ const checkUserInput = async () => {
 const startGame = async () => {
     // Resume the AudioContext if it's suspended
     if (Tone.context.state === "suspended") {
-    await Tone.context.resume();
+        await Tone.context.resume();
     }
-
     // Initialize Tone.js after the user clicks the Start button
     if (!synth) {
-    synth = new Tone.Synth().toDestination();
+        synth = new Tone.Synth().toDestination();
     }
     try {
-      const response = await axios.put("http://localhost:3000/api/v1/game-state");
-      gameState.sequence = response.data.gameState.sequence; // Save the sequence
-      gameState.level = response.data.gameState.level; // Save the current level
-      gameState.highScore = response.data.gameState.highScore; // Save the high score
-      updateUI(); // Update the UI with the new level and high score
-      playSequence(); // Play the sequence for the user to repeat
-    } catch (error) {
-      console.error("Error starting the game:", error);
+
+        replayButton.disabled = true;
+        const response = await axios.put("http://localhost:3000/api/v1/game-state");
+        gameState.sequence = response.data.gameState.sequence; // Save the sequence
+        gameState.level = response.data.gameState.level; // Save the current level
+        gameState.highScore = response.data.gameState.highScore; // Save the high score
+        updateUI(); // Update the UI with the new level and high score
+        playSequence(); // Play the sequence for the user to repeat
+    } 
+    catch (error) {
+        console.error("Error starting the game:", error);
     }
   };
 
 const playSequence = async () => {
     gameState.isPlaying = false; // Prevent user input while playing the sequence
+    replayButton.disabled = true;
     await new Promise(resolve => setTimeout(resolve, 1000)); // adding a 1 second delay before starting
     for (let i = 0; i < gameState.sequence.length; i++) {
         const padId = gameState.sequence[i];
@@ -210,6 +237,7 @@ const playSequence = async () => {
         await new Promise(resolve => setTimeout(resolve, 750));
     }
     gameState.isPlaying = true; // Allow user input after playing the sequence
+    replayButton.disabled = false;
 }
 
 const updateUI = async () => {
@@ -222,8 +250,3 @@ const updateUI = async () => {
         highScore.textContent = gameState.highScore;
     }
 }
-
-// ##################
-// ### GAME LOGIC ###
-// ##################
-
