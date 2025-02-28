@@ -4,16 +4,16 @@
 
 let synth;
 
-// TODO: Fetch the sequence needed, from the backend
+// gamestate object to keep track of the game
 let gameState = {
-    sequence: [],
-    userSequence: [],
+    sequence: [], // sequence needed
+    userSequence: [], // user input sequence
     level: 0,
     highScore: 0,
     isPlaying: false,
 };
 
-// Sound mapping for each pad
+// mapping the pads to the sounds
 const soundMap = {
     "pad-red": "C4",
     "pad-yellow": "D4",
@@ -37,7 +37,7 @@ const mapPadId = (pad) => {
         blue: "pad-blue",
         green: "pad-green"
     };
-    return mapping[pad] || pad; // return the original if no mapping exists
+    return mapping[pad] || pad; // returning the original if no mapping exists
 };
 
 // setting up the pads to get the tune when clicked
@@ -66,7 +66,7 @@ startButton.addEventListener("click", () =>{
 // ### REPLAY BUTTON ###
 // #####################
 replayButton.addEventListener("click", () => {
-    // Disable replay button immediately when replaying
+    // disable replay button when replaying
     replayButton.disabled = true;
     gameState.isPlaying = false;
     playSequence();
@@ -109,10 +109,10 @@ pads.forEach(pad => {
     });
 });
 
-// Handle the pad clicks
+// handle the pad clicks
 const PadClick = (padId) => {
-    if (gameState.isPlaying) { // only handle the click if the game is playing
-        console.log(padId)
+    if (gameState.isPlaying) { // only if the game is playing
+        console.log(padId);
         playSound(padId);
         lightUpPad(padId);
         gameState.userSequence.push(padId);
@@ -169,13 +169,13 @@ const checkUserInput = async () => {
     }
 
     // If the entire sequence was correctly inputted
-    if (gameState.userSequence.length === gameState.sequence.length) {
+    if (gameState.userSequence.length === gameState.sequence.length) { // checking length to check if the sequence is completed
         gameState.isPlaying = false;
 
         const url = "http://localhost:3000/api/v1/game-state/sequence";
         try {
-            const response = await axios.post(url, {
-                sequence: gameState.sequence
+            const response = await axios.post(url, { // post the sequence to the backend
+                sequence: gameState.sequence // we send the correct sequence to the backend, because we already know that the user input is correct
             });
             // succesful, Update game state with new sequence and level
             console.log("Success: ", response.data);
@@ -199,7 +199,7 @@ const checkUserInput = async () => {
 // TODO: Game logic: Fetch sequences from the backend, 
 // play them with correct timing, and validate user input.
 const startGame = async () => {
-    // Resume the AudioContext if it's suspended
+    // resuming the AudioContext if it's suspended
     if (Tone.context.state === "suspended") {
         await Tone.context.resume();
     }
@@ -210,7 +210,7 @@ const startGame = async () => {
     try {
 
         replayButton.disabled = true;
-        const response = await axios.put("http://localhost:3000/api/v1/game-state");
+        const response = await axios.put("http://localhost:3000/api/v1/game-state"); // put request to start the game and get the sequence
         gameState.sequence = response.data.gameState.sequence; // Save the sequence
         gameState.level = response.data.gameState.level; // Save the current level
         gameState.highScore = response.data.gameState.highScore; // Save the high score
@@ -223,38 +223,36 @@ const startGame = async () => {
 };
 
 const playSequence = () => {
-    // Disable user input and the replay button
+    // disable user input and the replay button when the sequence is playing
     gameState.isPlaying = false;
     replayButton.disabled = true;
 
-    // Wait 1 second before starting the sequence
     setTimeout(() => {
         let index = 0;
         const playNextPad = () => {
-            if (index < gameState.sequence.length) {
-                const padId = gameState.sequence[index];
+            if (index < gameState.sequence.length) { // check if there are pads left to play
+                const padId = gameState.sequence[index]; // get the pad id from the sequence
                 lightUpPad(padId);
                 playSound(padId);
                 index++;
-                // Wait 750ms before playing the next pad
+                // wait 750ms before playing the next pad
                 setTimeout(playNextPad, 750);
             } else {
-                // All pads have been played; allow user input and enable replay
+                // all the pads have been played, allow the user to input and enable replay
                 gameState.isPlaying = true;
                 replayButton.disabled = false;
             }
         };
         playNextPad();
-    }, 1000);
+    }, 1000); // wait 1 second before starting the sequence
 };
 
 const updateUI = async () => {
-    // implement
     if (levelIndicator) {
-        levelIndicator.textContent = gameState.level;
+        levelIndicator.textContent = gameState.level; // update the level
     }
 
     if (highScore) {
-        highScore.textContent = gameState.highScore;
+        highScore.textContent = gameState.highScore; // update the high score
     }
 }
