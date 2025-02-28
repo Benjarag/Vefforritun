@@ -224,21 +224,33 @@ const startGame = async () => {
     catch (error) {
         console.error("Error starting the game:", error);
     }
-  };
+};
 
-const playSequence = async () => {
-    gameState.isPlaying = false; // Prevent user input while playing the sequence
+const playSequence = () => {
+    // Disable user input and the replay button
+    gameState.isPlaying = false;
     replayButton.disabled = true;
-    await new Promise(resolve => setTimeout(resolve, 1000)); // adding a 1 second delay before starting
-    for (let i = 0; i < gameState.sequence.length; i++) {
-        const padId = gameState.sequence[i];
-        lightUpPad(padId)
-        playSound(padId)
-        await new Promise(resolve => setTimeout(resolve, 750));
-    }
-    gameState.isPlaying = true; // Allow user input after playing the sequence
-    replayButton.disabled = false;
-}
+
+    // Wait 1 second before starting the sequence
+    setTimeout(() => {
+        let index = 0;
+        const playNextPad = () => {
+            if (index < gameState.sequence.length) {
+                const padId = gameState.sequence[index];
+                lightUpPad(padId);
+                playSound(padId);
+                index++;
+                // Wait 750ms before playing the next pad
+                setTimeout(playNextPad, 750);
+            } else {
+                // All pads have been played; allow user input and enable replay
+                gameState.isPlaying = true;
+                replayButton.disabled = false;
+            }
+        };
+        playNextPad();
+    }, 1000);
+};
 
 const updateUI = async () => {
     // implement
