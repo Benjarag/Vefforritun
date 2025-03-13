@@ -1,0 +1,22 @@
+Breakpoint at line 3:
+__filename = 
+"C:\\Users\\benja\\OneDrive\\Desktop\\HR\\ar2\\onn2\\Vefforritun\\Vefforritun\\Vika9\\w9-10_lab_suppl\\mathUser.js"
+divResult = not yet assigned
+
+Breakpoint at line 5:
+__filename = 
+"C:\\Users\\benja\\OneDrive\\Desktop\\HR\\ar2\\onn2\\Vefforritun\\Vefforritun\\Vika9\\w9-10_lab_suppl\\mathUser.js"
+divResult = 
+0.9999999995
+
+
+Call stack at line 5 =
+<anonymous> (c:\Users\benja\OneDrive\Desktop\HR\ar2\onn2\Vefforritun\Vefforritun\Vika9\w9-10_lab_suppl\mathUser.js:5)
+<anonymous> (<node_internals>/internal/modules/cjs/loader:1554)
+<anonymous> (<node_internals>/internal/modules/cjs/loader:1706)
+<anonymous> (<node_internals>/internal/modules/cjs/loader:1289)
+<anonymous> (<node_internals>/internal/modules/cjs/loader:1108)
+TracingChannel.traceSync (<node_internals>/diagnostics_channel:322)
+wrapModuleLoad (<node_internals>/internal/modules/cjs/loader:220)
+function Module(id = '', parent) {.executeUserEntryPoint (<node_internals>/internal/modules/run_main:170)
+<anonymous> (<node_internals>/internal/main/run_main_module:36)
