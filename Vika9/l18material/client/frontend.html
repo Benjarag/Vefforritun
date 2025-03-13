@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo App Frontend</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <main class="container">
+        <div class="jumbotron bg-info-light text-dark border border-info text-justify">
+            <h2>Login</h2>
+
+            <form class="form-inline mb-5 mt-5">
+                <div class="form-group">
+                    <label for="username">Username: </label>
+                    <input type="text" class="form-control ml-5 mr-5" id="username" value="">
+                    <label for="password">Password: </label>
+                    <input type="password" class="form-control ml-5 mr-5" id="password" value="">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+            </form>
+        </div>
+
+        <div id="resultDiv" class="jumbotron bg-info-light text-dark border border-info text-justify">
+        </div>
+    </main>
+
+    <script>
+        function login() {
+            var paramValue = "someValue";
+
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var passString = btoa(username + ":" + password);
+            //The URL to which we will send the request
+            var url = 'http://localhost:3000/';
+
+            //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
+            axios.get(url, { headers: { Authorization: 'Basic ' + passString  } })
+                .then(function (response) {
+                    document.getElementById("resultDiv").innerHTML = "Response: " + response.status + " " + response.statusText;
+                })
+                .catch(function (error) {
+                    document.getElementById("resultDiv").innerHTML = "Response: " + error;
+                })
+                .then(function () {
+                });
+        }
+    </script>
+</body>
+
+</html>
