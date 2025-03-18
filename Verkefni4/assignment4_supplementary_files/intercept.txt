@@ -1,0 +1,9 @@
+POST /api/v1/playlists HTTP/1.1
+Host: localhost:3000
+Authorization: HMAC 4aa4f59d77ca3f3fec33bfee6afbc14f152dbee74ff9492a30a6191d63675015
+Content-Type: application/json
+Content-Length: 36
+
+{
+    "name": "Fantastic playlist"
+}
