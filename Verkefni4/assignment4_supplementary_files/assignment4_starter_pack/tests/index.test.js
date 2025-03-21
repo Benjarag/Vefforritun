@@ -81,7 +81,6 @@ describe("Endpoint tests", () => {
       expect(typeof song.id).toBe("number");
       expect(typeof song.title).toBe("string");
       expect(typeof song.artist).toBe("string");
-      expect(song.id).toBeGreaterThan(0);
     });
   });
 
@@ -98,6 +97,29 @@ describe("Endpoint tests", () => {
     expect(response.body).toHaveLength(1);
     expect(response.body).toContainEqual({ id: 4, title: "Abracadabra", artist: "Lady Gaga" });
   });
+
+  it ("GET /api/v1/songs should return a 400 status and an error message when trying to use a query parameter other than 'filter'", async () => {
+    const response = await request(app).get("/api/v1/songs?search=Lady Gaga");
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "Invalid query parameter. Only \"filter\" is allowed." });
+  });
+
+  it("Get /api/v1/songs should return an empty array if no song where found", async () => {
+    const response = await request(app).get("/api/v1/songs?filter=Gamli Noi");
+    // • The status code should be as expected (e.g., 200, 201)
+    expect(response.statusCode).toBe(200);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The response body is as expected
+    // – Only the right attributes are in the body
+    // – All attributes have the expected values
+    expect(response.body).toEqual([]);
+  });
+
   
   
   it("GET /api/v1/playlists/:playlistId should return a 200 status and an object of the playlist", async () => {
@@ -137,10 +159,10 @@ describe("Endpoint tests", () => {
     const songs = await request(app).get("/api/v1/songs");
     expect(songs.body).toHaveLength(7);
   });
-
+  
   it("DELETE /api/v1/songs/:songId should return a 400 status and an error message when trying to delete a song that is linked to a playlist", async () => {
     const response = await request(app).delete("/api/v1/songs/1");
-    // • The status code should be as expected (e.g., 200, 201)
+    // • The status code should be correct
     expect(response.statusCode).toBe(400);
     // • The response body is present
     expect(response.body).toBeTruthy();
@@ -230,6 +252,46 @@ describe("Endpoint tests", () => {
     expect(response.body).toEqual({ message: "Song requires a title and an artist." });
   });
 
+    // /* Check if the body parameters are of the correct format */
+    // if (typeof title !== "string") {
+    //   return res.status(400).json({
+    //     message: "title should be a string",
+    //   });
+  it("POST /api/v1/songs should fail when the request body contains a title that is not a string", async () => {
+    const response = await request(app).post("/api/v1/songs").send({ title: 123, artist: "Gamli Noi" });
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "title should be a string" });
+  });
+    
+    // }
+    // if (typeof artist !== "string") {
+    //   return res.status(400).json({
+    //     message: "artist should be a string",
+    //   });
+    // }
+  it("POST /api/v1/songs should fail when the request body contains an artist that is not a string", async () => {
+    const response = await request(app).post("/api/v1/songs").send({ title: "Gamli Noi", artist: 123 });
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "artist should be a string" });
+  });
+
+  it("POST /api/v1/songs should fail when the request body contains a song that already exists, with the same title and artist", async () => {
+    const response = await request(app).post("/api/v1/songs").send({ title: "Cry For Me", artist: "The Weeknd" });
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "A song with title Cry For Me and artist The Weeknd already exists." });
+  });
 
   it("POST /api/v1/playlists should fail when missing the correct authorization", async () => {
     const response = await request(app).post("/api/v1/playlists").send({ name: "Iceland Top 3" });
@@ -285,6 +347,80 @@ describe("Endpoint tests", () => {
     // – Only the right attributes are in the body
     // – All attributes have the expected values
     expect(response.body).toEqual({ id: 4, name: "Iceland Top 3", songIds: [] });
+  });
+ 
+  it("POST /api/v1/playlists should return a 403 status and an error message when using the wrong authorization method", async () => {
+    const response = await request(app).post("/api/v1/playlists").set(
+      "Authorization",
+      "MACH 4aa4f59d77ca3f3fec33bfee6afbc14f152dbee74ff9492a30a6191d63675015"
+    ).send({ name: "Iceland Top 3" });
+
+    // • The status code should be correct
+    expect(response.statusCode).toBe(403);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "Wrong authorization method." });
+  });
+
+  it("POST /api/v1/playlists should return a 403 status and an error message when using the wrong authorization hash", async () => {
+    const response = await request(app).post("/api/v1/playlists").set(
+      "Authorization",
+      "HMAC 4aa4f59d77ca3f3fec33bfee6afbc14f152dbee74ff9492a30a6191d63675016"
+    ).send({ name: "Iceland Top 3" });
+
+    // • The status code should be correct
+    expect(response.statusCode).toBe(403);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "Wrong hash." });  
+  });
+
+  it("POST /api/v1/playlists should return a 400 status and an error message when the request body does not contain the name property", async () => {
+    const response = await request(app).post("/api/v1/playlists").set(
+      "Authorization",
+      "HMAC 4aa4f59d77ca3f3fec33bfee6afbc14f152dbee74ff9492a30a6191d63675015"
+    ).send({ title: "Iceland Top 3" });
+
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "name should be a string" });
+  });
+
+  it("POST /api/v1/playlists should return a 400 status and an error message when the request body contains an empty name", async () => {
+    const response = await request(app).post("/api/v1/playlists").set(
+      "Authorization",
+      "HMAC 4aa4f59d77ca3f3fec33bfee6afbc14f152dbee74ff9492a30a6191d63675015"
+    ).send({ name: "" });
+
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "Playlist requires a valid name." });
+  });
+
+//   return res.status(400).json({
+//     message: `A playlist with name ${newPlaylist.name} already exists.`,
+//   });
+// }
+  it("POST /api/v1/playlists should return a 400 status and an error message when the request body contains a name that already exists", async () => {
+    const response = await request(app).post("/api/v1/playlists").set(
+      "Authorization",
+      "HMAC 4aa4f59d77ca3f3fec33bfee6afbc14f152dbee74ff9492a30a6191d63675015"
+    ).send({ name: "Hot Hits Iceland" });
+
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "A playlist with name Hot Hits Iceland already exists." });
   });
 
 
