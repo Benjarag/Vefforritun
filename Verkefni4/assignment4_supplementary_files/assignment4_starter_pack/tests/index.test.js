@@ -215,8 +215,7 @@ describe("Endpoint tests", () => {
     expect(song_response.body.songIds).toContain(6);
   });
 
-
-  it(" PATCH /api/v1/songs/:songId should fail when a request is made with a non-empty request body that does not contain any valid property for a song (title, artist)", async () => {
+  it("PATCH /api/v1/songs/:songId should fail when a request is made with a non-empty request body that does not contain any valid property for a song (title, artist)", async () => {
     const response = await request(app).patch("/api/v1/songs/2").send({ name: "Benjamin" }); // using send to send a request body
     // • The status code should be correct
     expect(response.statusCode).toBe(400);
@@ -230,6 +229,28 @@ describe("Endpoint tests", () => {
     expect(all_songs_response.body).toContainEqual({ id: 2, title: "Busy Woman", artist: "Sabrina Carpenter" });
   });
 
+  // /* SONGS 3.3 PATCH songs */
+  // app.patch(apiPath + version + "/songs/:songId", (req, res) => {
+  //   /* Validate that songId is an integer */
+  //   const songId = parseInt(req.params.songId);
+  //   Iif (!Number.isInteger(songId)) {
+  //     return res.status(400).json({
+  //       message: `songId must be an integer`,
+  //     });
+  //   }
+  it("PATCH /api/v1/songs/:songId should fail when the songId is not an integer", async () => {
+    const response = await request(app).patch("/api/v1/songs/heh").send({ title: "Benjamin" });
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "songId must be an integer" });
+
+    // check if the song is still the same as it was
+    const all_songs_response = await request(app).get("/api/v1/songs");
+    expect(all_songs_response.body).toContainEqual({ id: 2, title: "Busy Woman", artist: "Sabrina Carpenter" });
+  });
 
   it("GET /api/v1/playlists/:playlistId should fail when the playlist with the provided id does not exist", async () => {
     const response = await request(app).get("/api/v1/playlists/101");
@@ -241,7 +262,6 @@ describe("Endpoint tests", () => {
     expect(response.body).toEqual({ message: "Playlist with id 101 does not exists." });
   });
 
-
   it("POST /api/v1/songs should fail when the request body does not contain the artist property", async () => {
     const response = await request(app).post("/api/v1/songs").send({ title: "Gamli Noi" });
     // • The status code should be correct
@@ -252,11 +272,6 @@ describe("Endpoint tests", () => {
     expect(response.body).toEqual({ message: "Song requires a title and an artist." });
   });
 
-    // /* Check if the body parameters are of the correct format */
-    // if (typeof title !== "string") {
-    //   return res.status(400).json({
-    //     message: "title should be a string",
-    //   });
   it("POST /api/v1/songs should fail when the request body contains a title that is not a string", async () => {
     const response = await request(app).post("/api/v1/songs").send({ title: 123, artist: "Gamli Noi" });
     // • The status code should be correct
@@ -267,12 +282,6 @@ describe("Endpoint tests", () => {
     expect(response.body).toEqual({ message: "title should be a string" });
   });
     
-    // }
-    // if (typeof artist !== "string") {
-    //   return res.status(400).json({
-    //     message: "artist should be a string",
-    //   });
-    // }
   it("POST /api/v1/songs should fail when the request body contains an artist that is not a string", async () => {
     const response = await request(app).post("/api/v1/songs").send({ title: "Gamli Noi", artist: 123 });
     // • The status code should be correct
@@ -303,7 +312,6 @@ describe("Endpoint tests", () => {
     expect(response.body).toEqual({ message: "Unauthorized" });
 
   });
-
 
 
   // 3.3 POST Playlist Tests (1 test)
