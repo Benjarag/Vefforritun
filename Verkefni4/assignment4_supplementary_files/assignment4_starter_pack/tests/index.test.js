@@ -229,15 +229,6 @@ describe("Endpoint tests", () => {
     expect(all_songs_response.body).toContainEqual({ id: 2, title: "Busy Woman", artist: "Sabrina Carpenter" });
   });
 
-  // /* SONGS 3.3 PATCH songs */
-  // app.patch(apiPath + version + "/songs/:songId", (req, res) => {
-  //   /* Validate that songId is an integer */
-  //   const songId = parseInt(req.params.songId);
-  //   Iif (!Number.isInteger(songId)) {
-  //     return res.status(400).json({
-  //       message: `songId must be an integer`,
-  //     });
-  //   }
   it("PATCH /api/v1/songs/:songId should fail when the songId is not an integer", async () => {
     const response = await request(app).patch("/api/v1/songs/heh").send({ title: "Benjamin" });
     // • The status code should be correct
