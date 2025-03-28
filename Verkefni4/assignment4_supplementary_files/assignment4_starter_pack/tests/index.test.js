@@ -176,6 +176,17 @@ describe("Endpoint tests", () => {
     expect(song_response.body).toContainEqual({ id: 1, title: "Cry For Me", artist: "The Weeknd" });
   });
 
+  it("DELETE /api/v1/songs/:songId should return a 405 status and an error message when trying to delete a song with a method that is not allowed", async () => {
+    const response = await request(app).delete("/api/v1/songs").send({ id: 1 });
+    // • The status code should be correct
+    expect(response.statusCode).toBe(405);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "Method Not Allowed" });
+  });
+
+
   // 3.2 Failure Tests (5 tests)
   // In addition to the 3 success cases described in 3.1, write 5 tests for the following failure cases:
   // • PATCH /api/v1/playlists/:playlistId/songs/:songId should fail when the submit-
@@ -215,6 +226,26 @@ describe("Endpoint tests", () => {
     expect(song_response.body.songIds).toContain(6);
   });
 
+  it("PATCH /api/v1/playlists/:playlistId/songs/:songId should fail when the playlistId is not an integer", async () => {
+    const response = await request(app).patch("/api/v1/playlists/heh/songs/6");
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "playlistId must be an integer." });
+  });
+
+  it("PATCH /api/v1/playlists/:playlistId/songs/:songId should fail when the songId is not an integer", async () => {
+    const response = await request(app).patch("/api/v1/playlists/6/songs/heh");
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "songId must be an integer." });
+  });
+
   it("PATCH /api/v1/songs/:songId should fail when a request is made with a non-empty request body that does not contain any valid property for a song (title, artist)", async () => {
     const response = await request(app).patch("/api/v1/songs/2").send({ name: "Benjamin" }); // using send to send a request body
     // • The status code should be correct
@@ -251,6 +282,16 @@ describe("Endpoint tests", () => {
     expect(response.body).toBeTruthy();
     // • The error message is as expected
     expect(response.body).toEqual({ message: "Playlist with id 101 does not exists." });
+  });
+
+  it("GET /api/v1/playlists/:playlistId should fail when the playlistId is not an integer", async () => {
+    const response = await request(app).get("/api/v1/playlists/heh");
+    // • The status code should be correct
+    expect(response.statusCode).toBe(400);
+    // • The response body is present
+    expect(response.body).toBeTruthy();
+    // • The error message is as expected
+    expect(response.body).toEqual({ message: "playlistId must be an integer" });
   });
 
   it("POST /api/v1/songs should fail when the request body does not contain the artist property", async () => {
