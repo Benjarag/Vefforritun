@@ -445,10 +445,6 @@ describe("Endpoint tests", () => {
     expect(response.body).toEqual({ message: "Playlist requires a valid name." });
   });
 
-//   return res.status(400).json({
-//     message: `A playlist with name ${newPlaylist.name} already exists.`,
-//   });
-// }
   it("POST /api/v1/playlists should return a 400 status and an error message when the request body contains a name that already exists", async () => {
     const response = await request(app).post("/api/v1/playlists").set(
       "Authorization",
